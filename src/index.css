@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Engineering HUD Color System */
+    --background: 220 30% 7%;
+    --foreground: 210 20% 92%;
+
+    --card: 220 28% 10%;
+    --card-foreground: 210 20% 92%;
+
+    --popover: 220 28% 10%;
+    --popover-foreground: 210 20% 92%;
+
+    /* Cyan primary accent */
+    --primary: 190 90% 50%;
+    --primary-foreground: 220 30% 7%;
+
+    --secondary: 220 25% 16%;
+    --secondary-foreground: 210 20% 75%;
+
+    --muted: 220 25% 14%;
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 190 85% 45%;
+    --accent-foreground: 220 30% 7%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 22% 14%;
+    --ring: 190 90% 50%;
+
+    --radius: 0.375rem;
+
+    /* Status colors */
+    --status-safe: 145 65% 42%;
+    --status-fail: 0 72% 55%;
+    --status-warn: 38 92% 50%;
+    --status-info: 210 90% 60%;
+
+    /* Engineering panel */
+    --panel-bg: 220 28% 9%;
+    --panel-border: 220 20% 20%;
+    --calc-bg: 220 30% 6%;
+
+    --sidebar-background: 220 32% 8%;
+    --sidebar-foreground: 210 15% 75%;
+    --sidebar-primary: 190 90% 50%;
+    --sidebar-primary-foreground: 220 30% 7%;
+    --sidebar-accent: 220 25% 14%;
+    --sidebar-accent-foreground: 210 20% 85%;
+    --sidebar-border: 220 20% 15%;
+    --sidebar-ring: 190 90% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .calc-card {
+    @apply bg-[hsl(220,30%,6%)] border border-[hsl(220,20%,18%)] rounded-lg overflow-hidden;
+  }
+
+  .calc-card-header {
+    @apply flex items-center justify-between px-4 py-3 bg-[hsl(220,28%,9%)] border-b border-[hsl(220,20%,18%)] cursor-pointer;
+  }
+
+  .formula-block {
+    @apply font-mono text-sm bg-[hsl(220,30%,5%)] border border-[hsl(220,20%,16%)] rounded px-3 py-2 my-2;
+  }
+
+  .var-row {
+    @apply flex justify-between items-baseline py-1 border-b border-[hsl(220,20%,14%)] last:border-0;
+  }
+
+  .status-safe {
+    @apply text-[hsl(145,65%,42%)] bg-[hsl(145,65%,42%,0.1)] border border-[hsl(145,65%,42%,0.3)];
+  }
+
+  .status-fail {
+    @apply text-[hsl(0,72%,55%)] bg-[hsl(0,72%,55%,0.1)] border border-[hsl(0,72%,55%,0.3)];
+  }
+
+  .status-warn {
+    @apply text-[hsl(38,92%,50%)] bg-[hsl(38,92%,50%,0.1)] border border-[hsl(38,92%,50%,0.3)];
+  }
+
+  .utilization-bar {
+    @apply h-1.5 rounded-full overflow-hidden bg-[hsl(220,20%,18%)];
+  }
+
+  .step-active {
+    @apply bg-[hsl(190,90%,50%,0.15)] border-[hsl(190,90%,50%)] text-[hsl(190,90%,60%)];
+  }
+
+  .step-complete {
+    @apply bg-[hsl(145,65%,42%,0.1)] border-[hsl(145,65%,42%)] text-[hsl(145,65%,50%)];
+  }
+
+  .step-pending {
+    @apply bg-transparent border-[hsl(220,20%,22%)] text-[hsl(215,15%,50%)];
+  }
+
+  .input-field {
+    @apply bg-[hsl(220,22%,12%)] border border-[hsl(220,20%,20%)] text-foreground rounded focus:border-[hsl(190,90%,50%)] focus:ring-1 focus:ring-[hsl(190,90%,50%,0.3)] transition-colors;
+  }
+
+  .section-heading {
+    @apply text-xs font-semibold tracking-widest uppercase text-[hsl(190,90%,50%)] mb-3;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(220,30%,7%); }
+::-webkit-scrollbar-thumb { background: hsl(220,20%,25%); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(190,90%,30%); }
+
+/* Glow effects */
+.glow-cyan { box-shadow: 0 0 20px hsl(190,90%,50%,0.15); }
+.glow-safe { box-shadow: 0 0 12px hsl(145,65%,42%,0.2); }
+.glow-fail { box-shadow: 0 0 12px hsl(0,72%,55%,0.2); }
+
+/* Animation */
+@keyframes pulse-border {
+  0%, 100% { border-color: hsl(190,90%,50%,0.4); }
+  50% { border-color: hsl(190,90%,50%,0.9); }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
